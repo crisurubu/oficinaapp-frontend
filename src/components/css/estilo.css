@@ -1,0 +1,43 @@
+ul 
+{
+    margin-left: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: oblique;
+       
+}
+
+nav.navbar-transparente {
+	
+	background: rgba(40, 36, 253, 0.747);
+}
+ a  {
+    
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;   
+   
+     
+}
+a:link {
+  color: blue; /* Cor padrão do link */
+  text-decoration: none; /* Remover sublinhado, se desejar */
+}
+
+a:visited {
+  color: white; /* Cor após o link ser visitado */
+}
+
+a:hover {
+  color: rgb(6, 7, 6); /* Cor quando o mouse está sobre o link */
+}
+
+a:active {
+  color: red; /* Cor quando o link está sendo clicado */
+}
+
+
+
+
+
+ 
