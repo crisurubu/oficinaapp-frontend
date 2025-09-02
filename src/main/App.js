@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import NavBar from '../components/navbar';
 import Rotas from './rotas';
 import 'bootswatch/dist/cerulean/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'toastr/build/toastr.min.js'
 import 'toastr/build/toastr.css'
 import '../custom.css'
