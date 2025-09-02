@@ -8,7 +8,7 @@ import '../custom.css'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/'>
       <NavBar/>
         <div className="App">      
           <Rotas/>
