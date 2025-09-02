@@ -1,8 +1,9 @@
 import axios from "axios"
 
+const baseURL = process.env.REACT_APP_API_URL
 
 const httpClient = axios.create({
-    baseURL: "https://oficinaapp-backend.onrender.com",
+    baseURL: baseURL,
     withCredentials: true
 })
 
