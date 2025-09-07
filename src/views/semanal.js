@@ -2,8 +2,9 @@ import React from "react";
 import Card from "../components/card";
 import FormGroup from "../components/form-group";
 import SelectMenu from "../components/selectMenu";
-import FormularioService from '../app/service/formularioservice'
-import * as messages from '../components/toastr'
+import FormularioService from '../app/service/formularioservice';
+import DatePicker from "react-datepicker";
+import * as messages from '../components/toastr';
 
 
 class Semanal extends React.Component{
@@ -14,16 +15,27 @@ class Semanal extends React.Component{
         fim: ''
     }
 
+ 
+    constructor(){
+        super();
+        this.service = new FormularioService();
+    }
+
+    
     handleChange = (event) => {
         const value = event.target.value;
         const name =  event.target.name;
         this.setState({ [name]: value })
 
     }
-    constructor(){
-        super();
-        this.service = new FormularioService();
+
+    handleInicioChange = (inicio) => {
+        this.setState({inicio: inicio});
     }
+    handleFimChange = (fim) =>{
+        this.setState({fim: fim});
+    }
+
 
     gerar = () => {
         const lancamentoFiltro = {
@@ -33,6 +45,7 @@ class Semanal extends React.Component{
         }
         this.service.consultar(lancamentoFiltro)
             .then(response => {
+                messages.mensagemSucesso("Consulta Semanal realizada com sucesso! Aguarde download na barra do navegador.")
                
             }).catch(error => {
                         messages.mensagemErro(error.response.data)
@@ -60,20 +73,23 @@ class Semanal extends React.Component{
                                                         className="form-control" />
                                                 </FormGroup>
                                                 <FormGroup Label="Data Inicio: *" htmlFor="inputInicio">
-                                                    <input value={this.state.inicio}
-                                                           onChange={e => this.setState({inicio: e.target.value})}
-                                                           type="text"
-                                                           className="form-control"
-                                                           id="inputInicio"
-                                                           placeholder="Digite a data de inicio"/>
+                                                    <DatePicker
+                                                        className="form-control"
+                                                        id="inputInicio"
+                                                        selected={this.state.inicio}
+                                                        onChange={this.handleInicioChange}                                                           
+                                                        placeholderText="Selecione a data de inicio"
+                                                        dateFormat="yyyy-MM-dd"/>
                                                 </FormGroup>
                                                 <FormGroup Label="Data Fim: *" htmlFor="InputFim">
-                                                    <input type="text"
-                                                           value={this.state.fim}
-                                                           onChange={e => this.setState({fim: e.target.value})}
-                                                           className="form-control"
-                                                           id="InputFim"
-                                                           placeholder="Digite a data do fim"/>
+                                                   <DatePicker
+                                                        className="form-control"
+                                                        id="inputFim"
+                                                        selected={this.state.fim}
+                                                        onChange={this.handleFimChange}                                                           
+                                                        placeholderText="Selecione a data final"
+                                                        dateFormat="yyyy-MM-dd"/>
+                                                        
                                                 </FormGroup>
                                                 <button onClick={this.gerar} className="btn btn-success" style={{position: 'relative', top: '70px'}}>Gerar</button>                                                
                                             </fieldset>
