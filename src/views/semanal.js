@@ -4,6 +4,7 @@ import FormGroup from "../components/form-group";
 import SelectMenu from "../components/selectMenu";
 import FormularioService from '../app/service/formularioservice';
 import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 import * as messages from '../components/toastr';
 
 
@@ -30,11 +31,23 @@ class Semanal extends React.Component{
     }
 
     handleInicioChange = (inicio) => {
-        this.setState({inicio: inicio});
+        if (inicio) {
+            const inicioFormatado = inicio.toISOString().split('T')[0];
+            this.setState({ inicio: inicioFormatado });
+        } else {
+            this.setState({ inicio: '' });
+        }
     }
-    handleFimChange = (fim) =>{
-        this.setState({fim: fim});
+
+    handleFimChange = (fim) => {
+        if (fim) {
+            const fimFormatado = fim.toISOString().split('T')[0];
+            this.setState({ fim: fimFormatado });
+        } else {
+            this.setState({ fim: '' });
+        }
     }
+
 
 
     gerar = () => {
@@ -76,7 +89,7 @@ class Semanal extends React.Component{
                                                     <DatePicker
                                                         className="form-control"
                                                         id="inputInicio"
-                                                        selected={this.state.inicio}
+                                                        selected={this.state.inicio ? new Date(this.state.inicio) : null}
                                                         onChange={this.handleInicioChange}                                                           
                                                         placeholderText="Selecione a data de inicio"
                                                         dateFormat="yyyy-MM-dd"/>
@@ -85,7 +98,7 @@ class Semanal extends React.Component{
                                                    <DatePicker
                                                         className="form-control"
                                                         id="inputFim"
-                                                        selected={this.state.fim}
+                                                        selected={this.state.fim ? new Date(this.state.fim) : null}
                                                         onChange={this.handleFimChange}                                                           
                                                         placeholderText="Selecione a data final"
                                                         dateFormat="yyyy-MM-dd"/>

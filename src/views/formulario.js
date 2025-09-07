@@ -36,10 +36,17 @@ class Formulario extends React.Component {
         
 
     }
-     handleDateChange = (date) => {
-        // 'date' é o valor retornado pelo DatePicker
-        this.setState({ data: date });
-    }
+
+    handleDateChange = (date) => {
+        if (date) {
+            // transforma o Date em string no formato yyyy-MM-dd
+            const dataFormatada = date.toISOString().split('T')[0];
+            this.setState({ data: dataFormatada });
+        } else {
+            this.setState({ data: '' });
+        }
+    };
+
     
 
     submit = (e) => {
@@ -82,7 +89,7 @@ class Formulario extends React.Component {
                                 className="form-control" 
                                 id="inputData"
                                 name="data"                    
-                                selected={this.state.data}
+                                selected={this.state.data ? new Date(this.state.data) : null}
                                 onChange={this.handleDateChange}
                                 dateFormat="yyyy-MM-dd"
                                 placeholderText="Selecione a data:"/> 
